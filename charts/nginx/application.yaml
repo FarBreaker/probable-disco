@@ -16,8 +16,18 @@ spec:
     targetRevision: 22.3.2
     helm:
       releaseName: nginx-log-test
-      values: |
+      values: |+
         replicaCount: 3
+        serverBlock: |
+          server{
+            listen 8080;
+            location / {
+              return 200 'Hello from nginx';
+            }
+          }
+        service:
+          type: LoadBalancer
+          
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nginx
