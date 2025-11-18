@@ -32,13 +32,13 @@ spec:
             location / {
               return 200 'Hello from nginx';
             }
-
+            error_log /app/logs/nginx/error.log;
+            access_log /app/logs/nginx/access.log;
           }
         service:
           type: ClusterIP
         extraEnvVars:
           - name: LOG_LEVEL
-            value: info
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nginx
