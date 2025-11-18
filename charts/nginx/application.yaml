@@ -41,15 +41,13 @@ spec:
               return 404 'Not Found';
             }
             error_log /app/logs/nginx/error.log;
-            access_log /app/logs/nginx/access.log;
-            log_format perf '$remote_addr - $remote_user [$time_local] '
-            '"$request" $status $body_bytes_sent "$gzip_ratio" $request_time';
-            access_log /app/logs/nginx/access-performance.log perf;  
+
           }
         service:
           type: ClusterIP
         extraEnvVars:
           - name: LOG_LEVEL
+            value: debug
         readinessProbe:
           enabled: true
           path: /healthz
