@@ -7,6 +7,9 @@ metadata:
   namespace: argocd
 spec:
   project: default
+  syncPolicy:
+    automated:
+      enabled: true
   source:
     chart: nginx
     repoURL: https://charts.bitnami.com/bitnami

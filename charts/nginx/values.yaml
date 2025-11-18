@@ -1,1 +1,2 @@
-replicaCount: 3
+nginx-log-test:
+  replicaCount: 3
