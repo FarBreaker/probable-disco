@@ -13,7 +13,7 @@ spec:
   source:
     chart: nginx
     repoURL: oci://registry-1.docker.io/cloudpirates
-    targetRevision: 22.3.2
+    targetRevision: 0.4.3
     helm:
       releaseName: nginx-log-test
       values: |
