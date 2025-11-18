@@ -18,6 +18,14 @@ spec:
       releaseName: nginx-log-test
       values: |
         replicaCount: 1
+        extraVolumes:
+          - name: nginx-logs
+            persistentVolumeClaim:
+              claimName: kind-pvc
+        extraVolumeMounts:
+          - name: nginx-logs
+            mountPath: /var/log/nginx    
+
         serverBlock: |
           server{
             listen 8080;
