@@ -40,8 +40,8 @@ spec:
               # access_log off;
               return 404 'Not Found';
             }
-            # error_log /app/logs/nginx/error.log;
-            # access_log /app/logs/nginx/access.log main buffer=32k flush=5s;
+            error_log /app/logs/nginx/error.log;
+            access_log /app/logs/nginx/access.log main buffer=32k flush=5s;
           }
         service:
           type: LoadBalancer
