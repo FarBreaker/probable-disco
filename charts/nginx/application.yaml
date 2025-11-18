@@ -27,6 +27,9 @@ spec:
             mountPath: /app/logs/nginx
         serverBlock: |
           server{
+          gzip on;
+            gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+            gzip_comp_level 5;
             server_tokens off;
             listen 8080;
             server_name _;
