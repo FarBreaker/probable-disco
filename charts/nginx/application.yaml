@@ -44,7 +44,7 @@ spec:
             access_log /app/logs/nginx/access.log main buffer=32k flush=5s;
           }
         service:
-          type: ClusterIP
+          type: LoadBalancer
         extraEnvVars:
           - name: LOG_LEVEL
             value: debug
