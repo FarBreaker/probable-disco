@@ -27,30 +27,41 @@ spec:
             mountPath: /app/logs/nginx
         serverBlock: |
           server{
-          gzip on;
+            
+            #? Enabled GZIP compression
+            gzip on;
             gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
             gzip_comp_level 5;
+
+            #? Disabled Server Token
             server_tokens off;
+
+            #? Server Declaration
             listen 8080;
             server_name _;
 
             # location / {
               
             # }
+
+            #? Enabled caching of images, fonts and static files in general
             location ~* \.(jpg|jpeg|png|gif|css|js|ico|woff|woff2|ttf|svg|eot)$ {
               expires 30d;
               access_log off;
               add_header Cache-Control "public, max-age=2592000";
             }
+
+            #? Probes location
             location /healthz {
               access_log off;
               return 200 'OK';
             }
-            location /test {
-              # access_log off;
-              return 404 'Not Found';
-            }
-            error_log /app/logs/nginx/error.log;
+
+            #? Log Configuration
+            log_format main '$remote_addr - $remote_user [$time_local] '
+                '"$request" $status $body_bytes_sent '
+                '"$http_referer" "$http_user_agent"';
+            error_log /app/logs/nginx/error.log warn;
             access_log /app/logs/nginx/access.log main buffer=32k flush=5s;
           }
         service:
