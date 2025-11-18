@@ -33,7 +33,7 @@ spec:
               
             # }
             location /healthz {
-              # access_log off;
+              access_log off;
               return 200 'OK';
             }
             location /test {
