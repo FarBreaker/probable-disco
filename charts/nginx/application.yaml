@@ -35,6 +35,10 @@ spec:
               # access_log off;
               return 200 'OK';
             }
+            location /test {
+              # access_log off;
+              return 404 'Not Found';
+            }
             error_log /app/logs/nginx/error.log;
             access_log /app/logs/nginx/access.log;
           }
