@@ -30,10 +30,15 @@ spec:
             server_tokens off;
             listen 8080;
             server_name _;
-            limit_req_zone $binary_remote_addr zone=limit_per_ip:10m rate=10r/s;
+
             # location / {
               
             # }
+            location ~* \.(jpg|jpeg|png|gif|css|js|ico|woff|woff2|ttf|svg|eot)$ {
+              expires 30d;
+              access_log off;
+              add_header Cache-Control "public, max-age=2592000";
+            }
             location /healthz {
               access_log off;
               return 200 'OK';
