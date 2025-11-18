@@ -18,19 +18,34 @@ spec:
       releaseName: nginx-log-test
       values: |
         replicaCount: 1
-        extraVolumes:
+                livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          
+        readinessProbe:
+          httpGet:
+            path: /healthz 
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
           - name: nginx-logs
             persistentVolumeClaim:
               claimName: kind-pvc
         extraVolumeMounts:
           - name: nginx-logs
-            mountPath: /app/logs/nginx    
-
+            mountPath: /app/logs/nginx
         serverBlock: |
           server{
             listen 8080;
             location / {
               return 200 'Hello from nginx';
+            }
+            location /healthz {
+              access_log off;
+              return 200 'OK';
             }
             error_log /app/logs/nginx/error.log;
             access_log /app/logs/nginx/access.log;
