@@ -28,10 +28,7 @@ spec:
         serverBlock: |
           server{
             
-            #? Enabled GZIP compression
-            gzip on;
-            gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
-            gzip_comp_level 5;
+
 
             #? Disabled Server Token
             server_tokens off;
@@ -58,12 +55,20 @@ spec:
             }
 
             #? Log Configuration
-            log_format main '$remote_addr - $remote_user [$time_local] '
-                '"$request" $status $body_bytes_sent '
-                '"$http_referer" "$http_user_agent"';
             error_log /app/logs/nginx/error.log warn;
             access_log /app/logs/nginx/access.log main buffer=32k flush=5s;
           }
+        contextIncludes:
+          http: |
+            #? Log Format Configuration
+            log_format main '$remote_addr - $remote_user [$time_local] '
+              '"$request" $status $body_bytes_sent '
+              '"$http_referer" "$http_user_agent"';
+            #? Enabled GZIP compression
+            gzip on;
+            gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+            gzip_comp_level 5;
+
         service:
           type: LoadBalancer
         extraEnvVars:
