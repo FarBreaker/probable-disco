@@ -25,11 +25,8 @@ spec:
         extraVolumeMounts:
           - name: nginx-logs
             mountPath: /app/logs/nginx
-        serverBlock: |
+        serverBlock: |-
           server{
-            
-
-
             #? Disabled Server Token
             server_tokens off;
 
@@ -54,13 +51,26 @@ spec:
               return 200 'OK';
             }
 
+            #? Security disable
+            location ~ /\.ht {
+                  deny all;
+            }
+
             #? Log Configuration
             error_log /app/logs/nginx/error.log warn;
             access_log /app/logs/nginx/access.log main buffer=32k flush=5s;
           }
-          
 
+        contextIncludes:
+          http: |
+            # Enable gzip compression
+            gzip on;
+            gzip_vary on;
+            gzip_types text/plain application/json text/css;
 
+            # Security headers
+            add_header X-Frame-Options DENY;
+            add_header X-Content-Type-Options nosniff;
 
         service:
           type: LoadBalancer
