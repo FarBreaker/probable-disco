@@ -62,6 +62,8 @@ spec:
           }
 
         contextIncludes:
+          event:
+          main:
           http: |
             # Enable gzip compression
             gzip on;
