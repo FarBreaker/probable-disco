@@ -32,7 +32,7 @@ spec:
               return 200 'Hello from nginx';
             }
             location /healthz {
-              access_log off;
+              # access_log off;
               return 200 'OK';
             }
             error_log /app/logs/nginx/error.log;
