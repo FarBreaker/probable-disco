@@ -48,11 +48,17 @@ spec:
         extraEnvVars:
           - name: LOG_LEVEL
         readinessProbe:
+          enabled: true
           httpGet:
             path: /healthz 
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 5
+        livenessProbe:
+          enabled: true
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nginx
