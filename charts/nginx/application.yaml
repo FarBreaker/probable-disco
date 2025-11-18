@@ -16,7 +16,7 @@ spec:
     targetRevision: 22.3.2
     helm:
       releaseName: nginx-log-test
-      values: |+
+      values: |
         replicaCount: 1
         serverBlock: |
           server{
@@ -29,7 +29,9 @@ spec:
           }
         service:
           type: ClusterIP
-          
+        extraEnvVars:
+          - name: LOG_LEVEL
+            value: info
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nginx
