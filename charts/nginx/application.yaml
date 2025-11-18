@@ -58,6 +58,7 @@ spec:
           httpGet:
             path: /healthz 
             port: 8080
+        podLabels: "test"
 
   destination:
     server: "https://kubernetes.default.svc"
