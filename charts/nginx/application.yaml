@@ -17,7 +17,7 @@ spec:
     helm:
       releaseName: nginx-log-test
       values: |
-        replicaCount: 1
+        replicaCount: 3
         extraVolumes:
           - name: nginx-logs
             persistentVolumeClaim:
@@ -47,6 +47,12 @@ spec:
         extraEnvVars:
           - name: LOG_LEVEL
         readinessProbe:
+          httpGet:
+            path: /healthz 
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
           httpGet:
             path: /healthz 
             port: 8080
