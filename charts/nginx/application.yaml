@@ -55,9 +55,11 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
         livenessProbe:
-          enabled: true
-          initialDelaySeconds: 5
-          periodSeconds: 5
+          enabled: false
+        customLivenessProbe:
+          httpGet:
+            path: /healthz 
+            port: 8080
 
   destination:
     server: "https://kubernetes.default.svc"
