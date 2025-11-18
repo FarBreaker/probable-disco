@@ -41,7 +41,7 @@ spec:
               return 404 'Not Found';
             }
             error_log /app/logs/nginx/error.log;
-            access_log /app/logs/nginx/${HOSTNAME}/access.log;
+            access_log /app/logs/nginx/${HOSTNAME/access.log;
           }
         service:
           type: ClusterIP
