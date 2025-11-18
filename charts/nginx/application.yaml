@@ -24,7 +24,7 @@ spec:
               claimName: kind-pvc
         extraVolumeMounts:
           - name: nginx-logs
-            mountPath: /app/logs
+            mountPath: /app/logs/nginx
         serverBlock: |
           server{
             listen 8080;
