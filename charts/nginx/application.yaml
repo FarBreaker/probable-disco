@@ -17,7 +17,7 @@ spec:
     helm:
       releaseName: nginx-log-test
       values: |+
-        replicaCount: 3
+        replicaCount: 1
         serverBlock: |
           server{
             listen 8080;
