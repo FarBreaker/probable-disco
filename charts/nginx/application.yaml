@@ -60,6 +60,19 @@ spec:
           httpGet:
             path: /healthz 
             port: 8080
+        contextIncludes:
+          main: |
+            worker_processes auto;
+          events: | 
+            worker_connections 2048;
+            use epoll;
+          http: | 
+            gzip on;
+            gzip_vary on;
+            gzip_types text/plain application/json text/css;
+
+            add_header X-Frame-Options DENY;
+            add_header X-Content-Type-Options nosniff;
 
   destination:
     server: "https://kubernetes.default.svc"
