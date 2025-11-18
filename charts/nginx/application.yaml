@@ -24,7 +24,7 @@ spec:
               claimName: kind-pvc
         extraVolumeMounts:
           - name: nginx-logs
-            mountPath: /var/log/nginx    
+            mountPath: /app/logs/nginx    
 
         serverBlock: |
           server{
