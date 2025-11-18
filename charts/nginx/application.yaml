@@ -24,6 +24,8 @@ spec:
             location / {
               return 200 'Hello from nginx';
             }
+            error_log /var/log/nginx/error.log;
+            access_log /var/log/nginx/access.log
           }
         service:
           type: ClusterIP
