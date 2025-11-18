@@ -61,8 +61,6 @@ spec:
             path: /healthz 
             port: 8080
         contextIncludes:
-          main: |
-            worker_processes auto;
           events: | 
             worker_connections 2048;
             use epoll;
