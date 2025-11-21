@@ -18,10 +18,23 @@ spec:
       releaseName: nginx-log-test
       values: |
         replicaCount: 3
+        extraDeploy:
+          - apiVersion: v1
+            kind: PersistentVolumeClaim
+            metadata:
+              name: nginx-log-pvc
+              namespace: nginx
+            spec:
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+
         extraVolumes:
           - name: nginx-logs
             persistentVolumeClaim:
-              claimName: kind-pvc
+              claimName: nginx-log-pvc
         extraVolumeMounts:
           - name: nginx-logs
             mountPath: /app/logs/nginx
@@ -58,7 +71,7 @@ spec:
 
             #? Log Configuration
             error_log /app/logs/nginx/error.log warn;
-            access_log /app/logs/nginx/access.log main buffer=32k flush=5s;
+            access_log /app/logs/nginx/${HOSTNAME}/access.log main;
           }
         service:
           type: LoadBalancer
