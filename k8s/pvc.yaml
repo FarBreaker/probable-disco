@@ -5,7 +5,7 @@ metadata:
   namespace: nginx
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteOncePod
   resources:
     requests:
       storage: 1Gi
