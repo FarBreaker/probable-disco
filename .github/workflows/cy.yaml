@@ -16,7 +16,7 @@ jobs:
       - name: Get short SHA
         shell: bash
         run: |
-          echo "SHA_SHORT=${GITHUB_SHA::6} >> "$GITHUB_ENV"
+          echo "SHA_SHORT=${GITHUB_SHA::6}" >> "$GITHUB_ENV"
       - name: Docker Login
         uses: docker/login-action@v3
         with:
